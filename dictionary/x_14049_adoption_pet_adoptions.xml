@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Pet Adoptions" max_length="40" name="x_14049_adoption_pet_adoptions" type="collection">
+        <element label="Pet" max_length="32" name="pet" reference="x_14049_adoption_pets" type="reference"/>
+        <element label="User" max_length="32" name="user" reference="sys_user" type="reference"/>
+        <index name="index">
+            <element name="user"/>
+        </index>
+        <index name="index2">
+            <element name="pet"/>
+        </index>
+    </element>
+</database>

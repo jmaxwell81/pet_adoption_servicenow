@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function(spModal) {
+  /* widget controller */
+  var c = this;
+	var shared={};
+	c.onBrowsePets = function(size){
+		shared.currentPet = c.data.currentPet;
+		
+		spModal.open({
+			size: size,
+			title: "Adopt a Portal Pet!",
+			widget: "1b1ea2c9db31130043c1d170cf9619d7",
+			buttons: [
+				{label:'${Adopt}', primary:true}
+			],
+			shared: shared
+		}).then(function(){
+			c.data.selectedPet = shared.selectedPet;
+			c.server.update();
+		});
+	}
+	
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.pet-thankyou{
+    font-size: 1.5em;
+    color: darkgreen;
+    font-weight: 600;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>my_pet</id>
+        <internal>false</internal>
+        <link/>
+        <name>My Pet</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	
+	var userPet = new GlideRecord('x_14049_adoption_pet_adoptions');
+	userPet.addQuery('user', gs.getUserID());
+	userPet.query();
+	
+	if(userPet.next())
+		{
+			data.currentPet = {
+				name: userPet.pet.name.toString(),
+				photo: userPet.pet.photo.getDisplayValue().toString(),
+				id: userPet.sys_id.toString
+			}
+		}
+	
+	if(input && input.selectedPet != data.currentPet)
+		{
+			if(data.currentPet)
+				{
+					userPet.pet = input.selectedPet.id;
+					userPet.update();
+					data.currentPet = input.selectedPet;
+				}
+			else
+				{
+					var newPet = new GlideRecord('x_14049_adoption_pet_adoptions');
+					newPet.initialize();
+					newPet.pet = input.selectedPet.id;
+					newPet.user = gs.getUserID();
+					newPet.insert();
+					data.currentPet = input.selectedPet;
+				}
+		}
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-04-29 13:19:27</sys_created_on>
+        <sys_id>00db2e09db31130043c1d170cf96196e</sys_id>
+        <sys_mod_count>19</sys_mod_count>
+        <sys_name>My Pet</sys_name>
+        <sys_package display_value="Pet Adoption" source="x_14049_adoption">13c5aec1db31130043c1d170cf9619aa</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Pet Adoption">13c5aec1db31130043c1d170cf9619aa</sys_scope>
+        <sys_update_name>sp_widget_00db2e09db31130043c1d170cf96196e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-04-29 20:52:25</sys_updated_on>
+        <template><![CDATA[<div ng-if="!data.currentPet">
+<button class="adopt btn btn-primary" ng-click="c.onBrowsePets(lg)">
+  ${Need Emotional Support?}
+ </button>
+</div>
+
+<div ng-if="data.currentPet">
+<p class="pet-thankyou">Thankyou for adopting {{data.currentPet.name}}!</p>
+ <button class="btn btn-primary" ng-click="c.onBrowsePets(lg)">
+   Do you want to adopt a new Pet?
+  </button>
+<p><br>
+  <img ng-src={{data.currentPet.photo}}>
+</p>
+</div>]]></template>
+    </sp_widget>
+</record_update>

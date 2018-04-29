@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_ui_module">
+    <sys_ui_module action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <application display_value="Pet Adoptions">2a38a685db31130043c1d170cf9619c4</application>
+        <filter/>
+        <name>Pet Adoptions</name>
+        <order/>
+        <path/>
+        <path_relative_to_root>false</path_relative_to_root>
+        <roles>x_14049_adoption.pet_adoptions_user</roles>
+        <sys_class_name>sys_ui_module</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-04-29 13:15:51</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>d3fa6609db31130043c1d170cf9619ad</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Pet Adoptions</sys_name>
+        <sys_package display_value="Pet Adoption" source="x_14049_adoption">13c5aec1db31130043c1d170cf9619aa</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Pet Adoption">13c5aec1db31130043c1d170cf9619aa</sys_scope>
+        <sys_update_name>sys_ui_module_d3fa6609db31130043c1d170cf9619ad</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-04-29 13:15:51</sys_updated_on>
+        <table>x_14049_adoption_pet_adoptions</table>
+        <uncancelable>false</uncancelable>
+        <view_name/>
+    </sys_ui_module>
+</record_update>
